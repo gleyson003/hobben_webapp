@@ -1,24 +1,37 @@
 # Overview
-The Hobben Recommendation Engine is a JavaScript application that recommends small communities to users based on shared interests and subinterests. It calculates compatibility scores and ranks communities according to each user's preferences.
+Hobben is a responsive web application built with Node.js, Express, and EJS that helps users discover small communities based on shared interests and subinterests. Users select their preferences, and the application dynamically generates ranked community recommendations using a compatibility-based recommendation engine.
 
-I created Hobben to strengthen my JavaScript skills through a practical recommendation system. The project helped me apply concepts such as arrays, ES modules, recursion, exception handling, testing, and external libraries while building a reusable foundation for a future web application.
+To run the application locally, install the dependencies with npm install and start the Express server with npm start
 
 
 [Software Demo Video](https://youtu.be/Vyfgk-rECQE)
 
+# Web Pages
+The web app includes three dynamically generated pages:
+
+- Home / Preferences Page: This page displays the available interests and subinterests dynamically from the application data. The user enters a name and selects up to 4 interests and 5 subinterests. Submitting the form sends the selections to the server and transitions to the Recommendations page.
+
+- Recommendations Page: The server processes the user's selections through the Hobben recommendation engine and dynamically displays communities ranked by compatibility score. The top five matches are shown as recommended communities. Users can select View Community to open the details for a specific group.
+
+- Community Details Page: This page is dynamically generated using the community ID from the URL. The same EJS template displays different content depending on the selected community, including its name, interests, subinterests, and current number of members.
+
 
 # Development Environment
-I used Visual Studio Code, Node.js, npm, and GitHub to develop and manage the project.
+I used Visual Studio Code to develop the application, Node.js and Express to run the local web server, npm to manage dependencies, and Git/GitHub for version control.
 
-The software was written in JavaScript using ES Modules and Lodash for handling duplicate values in the recommendation engine.
+The application was written in JavaScript using EJS for dynamically generated web pages and Lodash to support the recommendation engine. CSS was used to create a responsive interface for mobile, tablet, and desktop screens.
 
 
 # Useful Websites
+- [express](https://expressjs.com/),
+- [EJS](https://ejs.co/)
 - [Lo - Lodash](https://lodash.com/docs/)
 - [Node.js](https://nodejs.org/docs/latest/api/)
-- [Mmdn_](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- [mdn](https://developer.mozilla.org/)
 
 # Future Work
-- Develop a web interface for users to select interests and view recommendations.
-- Improve the recommendation algorithm with additional matching criteria, such as location and group availability.
-- Add persistent data storage so users, communities, and preferences can be saved.
+- Add a cloud database to persist users, communities, interests, and subinterests.
+- Implement user accounts and authentication, including email/password and Google sign-in.
+- Allow users to create and join communities and view the groups they participate in.
+- Improve recommendations by considering additional information such as location, group availability, and meeting preferences.
+- Continue improving the responsive interface and overall user experience.

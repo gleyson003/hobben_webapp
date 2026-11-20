@@ -1,24 +1,30 @@
 {
-  "name": "hobben_recomendation",
+  "name": "hobben_webapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A Node.js web application that recommends communities based on user interests and subinterests.",
+  "main": "src/server.js",
   "scripts": {
-    "test": "node tests/matchingService.test.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "node tests/matchingService.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gleyson003/hobben_recomendation.git"
+    "url": "git+https://github.com/gleyson003/hobben_webapp.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "nodejs",
+    "express",
+    "ejs",
+    "recommendation-engine",
+    "web-app"
+  ],
+  "author": "Gleyson Lopes",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/gleyson003/hobben_recomendation/issues"
+    "url": "https://github.com/gleyson003/hobben_webapp/issues"
   },
-  "homepage": "https://github.com/gleyson003/hobben_recomendation#readme",
+  "homepage": "https://github.com/gleyson003/hobben_webapp#readme",
   "dependencies": {
     "ejs": "^7.0.2",
     "express": "^5.3.0",

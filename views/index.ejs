@@ -4,17 +4,13 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <!-- Makes the page responsive on mobile devices and tablets. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Hobben</title>
 
-    <link
-        rel="stylesheet"
-        href="/css/styles.css"
-    >
+    <!-- Loads the shared responsive stylesheet from the public directory. -->
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -26,11 +22,125 @@
         <h2>Find your community</h2>
 
         <p>
-            Discover small communities based on
-            your interests and subinterests.
+            Select your interests and discover communities
+            that match your preferences.
         </p>
 
+        <!--
+            Sends the user's name, interests, and subinterests
+            to the Express server using an HTTP POST request.
+        -->
+        <form action="/recommendations" method="POST">
+
+            <section>
+
+                <label for="name">
+                    Your name
+                </label>
+
+                <input type="text" id="name" name="name" required>
+
+            </section>
+
+
+            <section>
+
+                <h3>Interests</h3>
+
+                <p>Select up to 4 interests.</p>
+
+                <!--
+                    EJS dynamically creates one checkbox for every
+                    interest received from the Express server.
+                -->
+                <% interests.forEach(interest=> { %>
+
+                    <label class="option">
+
+                        <input type="checkbox" name="interests" value="<%= interest.id %>">
+
+                        <%= interest.name %>
+
+                    </label>
+
+                    <% }) %>
+
+            </section>
+
+
+            <section>
+
+                <h3>Subinterests</h3>
+
+                <p>Select up to 5 subinterests.</p>
+
+                <!--
+                    EJS dynamically creates one checkbox for every
+                    subinterest received from the Express server.
+                -->
+                <% subinterests.forEach(subinterest=> { %>
+
+                    <label class="option">
+
+                        <input type="checkbox" name="subinterests" value="<%= subinterest.id %>">
+
+                        <%= subinterest.name %>
+
+                    </label>
+
+                    <% }) %>
+
+            </section>
+
+
+            <button type="submit">
+                Find Communities
+            </button>
+
+        </form>
+
     </main>
+
+
+    <script>
+
+        // Limits how many checkboxes can be selected
+        // for a specific group of options.
+        function limitCheckboxes(name, maxAllowed) {
+
+            const checkboxes = document.querySelectorAll(
+                `input[name="${name}"]`
+            );
+
+            checkboxes.forEach(checkbox => {
+
+                checkbox.addEventListener("change", () => {
+
+                    // Counts how many options are currently selected.
+                    const selected = document.querySelectorAll(
+                        `input[name="${name}"]:checked`
+                    );
+
+                    // Prevents the most recent selection when
+                    // the maximum allowed number is exceeded.
+                    if (selected.length > maxAllowed) {
+
+                        checkbox.checked = false;
+
+                        alert(
+                            `You can select up to ${maxAllowed} ${name}.`
+                        );
+                    }
+                });
+            });
+        }
+
+
+        // Applies the selection limits defined by the application.
+        limitCheckboxes("interests", 4);
+        limitCheckboxes("subinterests", 5);
+
+    </script>
 
 </body>
 

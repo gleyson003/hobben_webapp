@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on mobile devices and tablets. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- The page title is dynamically generated from the selected community. -->
+    <title>
+        <%= group.name %> - Hobben
+    </title>
+
+    <!-- Loads the shared responsive stylesheet. -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body>
+
+    <main>
+
+        <!-- Displays the name of the community selected by the user. -->
+        <h1>
+            <%= group.name %>
+        </h1>
+
+
+        <section>
+
+            <h2>Interests</h2>
+
+            <!--
+                Dynamically displays the interests associated
+                with the selected community.
+            -->
+            <% groupInterests.forEach(interest=> { %>
+
+                <p>
+                    <%= interest.name %>
+                </p>
+
+                <% }) %>
+
+        </section>
+
+
+        <section>
+
+            <h2>Subinterests</h2>
+
+            <!--
+                Displays a message when the community has no
+                specific subinterests.
+            -->
+            <% if (groupSubinterests.length===0) { %>
+
+                <p>No specific subinterests.</p>
+
+                <% } else { %>
+
+                    <!--
+                    Dynamically displays all subinterests associated
+                    with the selected community.
+                -->
+                    <% groupSubinterests.forEach(subinterest=> { %>
+
+                        <p>
+                            <%= subinterest.name %>
+                        </p>
+
+                        <% }) %>
+
+                            <% } %>
+
+        </section>
+
+
+        <!-- Displays the current number of community members.
+             Communities are currently limited to six members. -->
+        <p>
+            Members:
+            <%= group.users_id.length %> / 6
+        </p>
+
+
+        <!-- Returns the user to the preference selection page. -->
+        <p>
+            <a href="/">
+                Find other communities
+            </a>
+        </p>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on mobile devices and tablets. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hobben - Recommendations</title>
+
+    <!-- Loads the shared responsive stylesheet. -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Recommended Communities</h1>
+
+        <!--
+            Displays the name submitted by the user
+            on the preferences page.
+        -->
+        <p>
+            Hi <strong>
+                <%= user.name %>
+            </strong>,
+            here are the communities that best match your interests.
+        </p>
+
+
+        <!-- Displays a message when the recommendation engine
+             does not find any matching communities. -->
+        <% if (recommendations.length===0) { %>
+
+            <p>
+                No matching communities were found.
+            </p>
+
+            <% } else { %>
+
+
+                <h2>Recommended for you</h2>
+
+                <!--
+                Displays up to the five communities with the
+                highest compatibility scores.
+            -->
+                <% recommendations.slice(0, 5).forEach(group=> { %>
+
+                    <article class="community-card">
+
+                        <h3>
+                            <%= group.groupName %>
+                        </h3>
+
+                        <p>
+                            <strong class="match-score">
+                                <%= group.compatibilityScore %>% match
+                            </strong>
+                        </p>
+
+                        <p>
+                            Matching interests:
+                            <%= group.matchingInterests.join(", ") %>
+                    </p>
+
+
+                    <!-- Displays matching subinterests only when
+                         at least one hierarchical match exists. -->
+                    <% if (group.matchingSubinterests.length > 0) { %>
+
+                        <p>
+                            Matching subinterests:
+                            <%= group.matchingSubinterests.join(" , ") %>
+                        </p>
+
+                    <% } %>
+
+
+                    <!-- Sends the selected community ID to the
+                         dynamic community details route. -->
+                    <a href=" /community/<%=group.groupId %>">
+                                View Community
+                                </a>
+
+                    </article>
+
+                    <% }) %>
+
+
+                        <!--
+                If more than five recommendations exist,
+                displays the remaining communities separately.
+            -->
+                        <% if (recommendations.length> 5) { %>
+
+                            <h2>Other Communities</h2>
+
+                            <% recommendations.slice(5).forEach(group=> { %>
+
+                                <article class="community-card">
+
+                                    <h3>
+                                        <%= group.groupName %>
+                                    </h3>
+
+                                    <p>
+                                        <strong class="match-score">
+                                            <%= group.compatibilityScore %>% match
+                                        </strong>
+                                    </p>
+
+                                    <a href="/community/<%= group.groupId %>">
+                                        View Community
+                                    </a>
+
+                                </article>
+
+                                <% }) %>
+
+                                    <% } %>
+
+                                        <% } %>
+
+
+                                            <!-- Returns the user to the dynamic preferences page. -->
+                                            <p>
+                                                <a href="/">
+                                                    Change preferences
+                                                </a>
+                                            </p>
+
+    </main>
+
+</body>
+
+</html>
